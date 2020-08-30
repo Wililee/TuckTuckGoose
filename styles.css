@@ -24,9 +24,6 @@ div {
     width: 100%;
 }
 
-.noPieceHere {
-    background-color: #F0D2B4;
-}
 
 td {
     text-align: center;
@@ -35,27 +32,12 @@ td {
     height: 30px;
 }
 
-.red-turn-text {
-    text-align: center;
-    color: black;
-    font-family: "open sans";
-    font-size: 55px;
-}
-
-.black-turn-text {
-    text-align: center;
-    font-family: "open sans";
-    font-size: 55px;
-    color: lightgray;
-}
-
 .empty-hole {
     width: 10px;
     height: 10px;
     padding: 6px;
-    background-color: blue;
-    border: 1px solid white;
-    border-radius: 25px;
+    background-color: #86592b;
+    border-radius: 10px;
 }
 
 .red-hole {
@@ -63,16 +45,14 @@ td {
     height: 10px;
     padding: 6px;
     background-color: red;
-    border: 1px solid white;
-    border-radius: 25px;
+    border-radius: 10px;
 }
 .black-hole {
     width: 10px;
     height: 10px;
     padding: 6px;
     background-color: black;
-    border: 1px solid white;
-    border-radius: 25px;
+    border-radius: 10px;
 }
 
 .yellow-hole {
@@ -80,8 +60,7 @@ td {
     height: 10px;
     padding: 6px;
     background-color: yellow;
-    border: 1px solid white;
-    border-radius: 25px;
+    border-radius: 10px;
 }
 
 .green-hole {
@@ -89,8 +68,7 @@ td {
     height: 10px;
     padding: 6px;
     background-color: green;
-    border: 1px solid white;
-    border-radius: 25px;
+    border-radius: 10px;
 }
 
 .white-hole {
@@ -98,8 +76,7 @@ td {
     height: 10px;
     padding: 6px;
     background-color: white;
-    border: 1px solid white;
-    border-radius: 25px;
+    border-radius: 10px;
 }
 
 .blue-hole {
@@ -107,8 +84,7 @@ td {
     height: 10px;
     padding: 6px;
     background-color: blue;
-    border: 1px solid white;
-    border-radius: 25px;
+    border-radius: 10px;
 }
 
 p {
