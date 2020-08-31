@@ -1,477 +1,519 @@
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <title>TuckTuckGoose</title>
+  </head>
 
-<head>
-  <link rel="stylesheet" type="text/css" href="styles.css"/>
-  <title>TuckTuckGoose</title>
-</head>
+  <body>
 
-<main>
-  <table>
-      <tr> <!-- 1 -->
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><p class = "red-piece" id = "RP1"></p></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><p class = "black-piece" id = "Bl4"></p></td>
-          <td><p class = "black-piece" id = "Bl3"></p></td>
-          <td></td>
-          <td><p class = "black-piece" id = "Bl2"></p></td>
-          <td><p class = "black-piece" id = "Bl1"></p></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><p class = "yellow-piece" id = "YP4"></p></td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr> <!-- 2 -->
-        <td></td>
-        <td></td>
-        <td><p class = "red-piece" id = "RP2"></p></td>
-        <td></td>
-        <td><p class = "empty-hole" id = "R0">0</p></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><p class = "empty-hole" id = "Bl15">15</p></td>
-        <td><p class = "empty-hole" id = "Bl16">16</p></td>
-        <td></td>
-        <td><p class = "empty-hole" id = "Bl17">17</p></td>
-        <td><p class = "empty-hole" id = "Bl0">0</p></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><p class = "empty-hole" id = "Y15">15</p></td>
-        <td></td>
-        <td><p class = "yellow-piece" id = "YP3"></p></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr> <!-- 3 -->
-      <td></td>
-      <td><p class = "red-piece" id = "RP3"></p></td>
-      <td></td>
-      <td><p class = "empty-hole" id = "R17">17</p></td>
-      <td></td>
-      <td><p class = "empty-hole" id = "Bl1">1</p></td>
-      <td></td>
-      <td></td>
-      <td><p class = "empty-hole" id = "Bl14">14</p></td>
-      <td></td>
-      <td><p class = "black-hole" id = "BlH1"></p></td>
-      <td></td>
-      <td><p class = "empty-hole" id = "Y1">1</p></td>
-      <td></td>
-      <td></td>
-      <td><p class = "empty-hole" id = "Y14">14</p></td>
-      <td></td>
-      <td><p class = "empty-hole" id = "Y16">16</p></td>
-      <td></td>
-      <td><p class = "yellow-piece" id = "YP2"></p></td>
-      <td></td>
-  </tr>
-  <tr> <!-- 4 -->
-    <td><p class = "red-piece" id = "RP4"></p></td>
-    <td></td>
-    <td><p class = "empty-hole" id = "R16">16</p></td>
-    <td><p class = "red-hole" id = "RH1"></p></td>
-    <td></td>
-    <td></td>
-    <td><p class = "empty-hole" id = "Bl2">2</p></td>
-    <td></td>
-    <td><p class = "empty-hole" id = "Bl13">13</p></td>
-    <td></td>
-    <td><p class = "black-hole" id = "BlH2"></p></td>
-    <td></td>
-    <td><p class = "empty-hole" id = "Y2">2</p></td>
-    <td></td>
-    <td><p class = "empty-hole" id = "Y13">13</p></td>
-    <td></td>
-    <td></td>
-    <td><p class = "yellow-hole" id = "YH1"></p></td>
-    <td><p class = "empty-hole" id = "Y17">17</p></td>
-    <td></td>
-    <td><p class = "yellow-piece" id = "YP1"></p></td>
-</tr>
-<tr> <!-- 5 -->
-  <td></td>
-  <td><p class = "empty-hole" id = "R15">15</p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "red-hole" id = "RH2"></p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "Bl3">3</p></td>
-  <td><p class = "empty-hole" id = "Bl12">12</p></td>
-  <td></td>
-  <td><p class = "black-hole" id = "BlH3"></p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "Y3">3</p></td>
-  <td><p class = "empty-hole" id = "Y12">12</p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "yellow-hole" id = "YH2"></p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "Y0">0</p></td>
-  <td></td>
-</tr>
-<tr> <!-- 6 -->
-  <td></td>
-  <td><p class = "empty-hole" id = "R14">14</p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "red-hole" id = "RH3"></p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "Bl4">4</p></td>
-  <td><p class = "empty-hole" id = "Bl11">11</p></td>
-  <td></td>
-  <td><p class = "black-hole" id = "BlH4"></p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "Y4">4</p></td>
-  <td><p class = "empty-hole" id = "Y11">11</p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "yellow-hole" id = "YH3"></p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "G1">1</p></td>
-  <td></td>
-</tr>
-<tr> <!-- 7 -->
-  <td></td>
-  <td><p class = "empty-hole" id = "R13">13</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "red-hole" id = "RH4"></p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "Bl5">5</p></td>
-  <td><p class = "empty-hole" id = "B10">10</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "Y5">5</p></td>
-  <td><p class = "empty-hole" id = "Y10">10</p></td>
-  <td></td>
-  <td><p class = "yellow-hole" id = "YH4"></p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "G2">2</p></td>
-  <td></td>
-</tr>
-<tr> <!-- 8 -->
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "R12">12</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "Bl6">6</p></td>
-  <td><p class = "empty-hole" id = "Bl9">9</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "Y6">6</p></td>
-  <td><p class = "empty-hole" id = "Y9">9</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "G3">3</p></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr> <!-- 9 -->
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "R11">11</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "Bl7">7</p></td>
-  <td><p class = "empty-hole" id = "Bl8">8</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "Y7">7</p></td>
-  <td><p class = "empty-hole" id = "Y8">8</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "G4">4</p></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr> <!-- 10 -->
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "R10">10</p></td>
-  <td><p class = "empty-hole" id = "R9">9</p></td>
-  <td><p class = "empty-hole" id = "R8">8</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "G7">7</p></td>
-  <td><p class = "empty-hole" id = "G6">6</p></td>
-  <td><p class = "empty-hole" id = "G5">5</p></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr> <!-- 11 -->
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "R5">5</p></td>
-  <td><p class = "empty-hole" id = "R6">6</p></td>
-  <td><p class = "empty-hole" id = "R7">7</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "G8">8</p></td>
-  <td><p class = "empty-hole" id = "G9">9</p></td>
-  <td><p class = "empty-hole" id = "G10">10</p></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr> <!-- 12 -->
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "R4">4</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "B8">8</p></td>
-  <td><p class = "empty-hole" id = "B7">7</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "W8">8</p></td>
-  <td><p class = "empty-hole" id = "W7">7</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "G11">11</p></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr> <!-- 13 -->
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "R3">3</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "B9">9</p></td>
-  <td><p class = "empty-hole" id = "B6">6</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "W9">9</p></td>
-  <td><p class = "empty-hole" id = "W6">6</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "G12">12</p></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr> <!-- 14 -->
-  <td></td>
-  <td><p class = "empty-hole" id = "R2">2</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "blue-hole" id = "BH4"></p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "B10">10</p></td>
-  <td><p class = "empty-hole" id = "B5">5</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "W10">10</p></td>
-  <td><p class = "empty-hole" id = "W5">5</p></td>
-  <td></td>
-  <td><p class = "green-hole" id = "GH4"></p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "G13">13</p></td>
-  <td></td>
-</tr>
-<tr> <!-- 15 -->
-  <td></td>
-  <td><p class = "empty-hole" id = "R1">1</p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "blue-hole" id = "BH3"></p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "B11">11</p></td>
-  <td><p class = "empty-hole" id = "B4">4</p></td>
-  <td></td>
-  <td><p class = "white-hole" id = "WH4"></p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "W11">11</p></td>
-  <td><p class = "empty-hole" id = "W4">4</p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "green-hole"id = "GH3"></p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "G14">14</p></td>
-  <td></td>
-</tr>
-<tr> <!-- 16 -->
-  <td></td>
-  <td><p class = "empty-hole" id = "B0">0</p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "blue-hole" id = "BH2"></p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "B12">12</p></td>
-  <td><p class = "empty-hole" id = "B3">3</p></td>
-  <td></td>
-  <td><p class = "white-hole" id = "WH3"></p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "W12">12</p></td>
-  <td><p class = "empty-hole" id = "W3">3</p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "green-hole" id = "GH2"></p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "G15">15</p></td>
-  <td></td>
-</tr>
-<tr> <!-- 17 -->
-  <td><p class = "blue-piece" id = "BP1"></p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "B17">17</p></td>
-  <td><p class = "blue-hole" id = "BH1"></p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "B13">13</p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "B2">2</p></td>
-  <td></td>
-  <td><p class = "white-hole" id = "WH2"></p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "W13">13</p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "W2">2</p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "green-hole" id = "GH1"></p></td>
-  <td><p class = "empty-hole" id = "G16">16</p></td>
-  <td></td>
-  <td><p class = "green-piece" id = "GP4"></p></td>
-</tr>
-<tr> <!-- 18 -->
-  <td></td>
-  <td><p class = "blue-piece" id = "BP2"></p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "B16">16</p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "B14">14</p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "B1">1</p></td>
-  <td></td>
-  <td><p class = "white-hole" id = "WH1"></p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "W14">14</p></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "W1">1</p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "G17">17</p></td>
-  <td></td>
-  <td><p class = "green-piece" id = "GP3"></p></td>
-  <td></td>
-</tr>
-<tr> <!-- 19 -->
-  <td></td>
-  <td></td>
-  <td><p class = "blue-piece" id = "BP3"></p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "B15">15</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "W0">0</p></td>
-  <td><p class = "empty-hole" id = "W17">17</p></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "W16">16</p></td>
-  <td><p class = "empty-hole" id = "W15">15</p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "empty-hole" id = "G0">0</p></td>
-  <td></td>
-  <td><p class = "green-piece" id = "GP2"></p></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr> <!-- 20 -->
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "blue-piece" id = "BP4"></p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "white-piece" id = "WP1"></p></td>
-  <td><p class = "white-piece" id = "WP2"></p></td>
-  <td></td>
-  <td><p class = "white-piece" id = "WP3"></p></td>
-  <td><p class = "white-piece" id = "WP4"></p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><p class = "green-piece" id = "GP1"></p></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
+    <div id="menu">
+      <!--place to enter name-->
+      <input id="enterName" placeholder="Enter name" />
 
-  </table>
+      <!--Create lobby-->
+      <button id="createLobby">Create</button>
 
-</main>
-</body>
+      <!--Join lobby-->
+      <button id="joinLobby">Join</button>
 
+      <!--lobby code-->
+      <input id="enterCode" placeholder="Enter Room Code" />
+    </div>
+
+    <div id="lobby">
+      <button id = "startGame">Everyone is In!</button>
+    </div>
+
+    <div id="inGame">
+      <main>
+        <table>
+          <tr>
+            <!-- 1 -->
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="red-piece" id="RP1"></p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="black-piece" id="Bl4"></p></td>
+            <td><p class="black-piece" id="Bl3"></p></td>
+            <td></td>
+            <td><p class="black-piece" id="Bl2"></p></td>
+            <td><p class="black-piece" id="Bl1"></p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="yellow-piece" id="YP4"></p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 2 -->
+            <td></td>
+            <td></td>
+            <td><p class="red-piece" id="RP2"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="R0">0</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="Bl15">15</p></td>
+            <td><p class="empty-hole" id="Bl16">16</p></td>
+            <td></td>
+            <td><p class="empty-hole" id="Bl17">17</p></td>
+            <td><p class="empty-hole" id="Bl0">0</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="Y15">15</p></td>
+            <td></td>
+            <td><p class="yellow-piece" id="YP3"></p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 3 -->
+            <td></td>
+            <td><p class="red-piece" id="RP3"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="R17">17</p></td>
+            <td></td>
+            <td><p class="empty-hole" id="Bl1">1</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="Bl14">14</p></td>
+            <td></td>
+            <td><p class="black-hole" id="BlH1"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="Y1">1</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="Y14">14</p></td>
+            <td></td>
+            <td><p class="empty-hole" id="Y16">16</p></td>
+            <td></td>
+            <td><p class="yellow-piece" id="YP2"></p></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 4 -->
+            <td><p class="red-piece" id="RP4"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="R16">16</p></td>
+            <td><p class="red-hole" id="RH1"></p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="Bl2">2</p></td>
+            <td></td>
+            <td><p class="empty-hole" id="Bl13">13</p></td>
+            <td></td>
+            <td><p class="black-hole" id="BlH2"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="Y2">2</p></td>
+            <td></td>
+            <td><p class="empty-hole" id="Y13">13</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="yellow-hole" id="YH1"></p></td>
+            <td><p class="empty-hole" id="Y17">17</p></td>
+            <td></td>
+            <td><p class="yellow-piece" id="YP1"></p></td>
+          </tr>
+          <tr>
+            <!-- 5 -->
+            <td></td>
+            <td><p class="empty-hole" id="R15">15</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="red-hole" id="RH2"></p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="Bl3">3</p></td>
+            <td><p class="empty-hole" id="Bl12">12</p></td>
+            <td></td>
+            <td><p class="black-hole" id="BlH3"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="Y3">3</p></td>
+            <td><p class="empty-hole" id="Y12">12</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="yellow-hole" id="YH2"></p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="Y0">0</p></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 6 -->
+            <td></td>
+            <td><p class="empty-hole" id="R14">14</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="red-hole" id="RH3"></p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="Bl4">4</p></td>
+            <td><p class="empty-hole" id="Bl11">11</p></td>
+            <td></td>
+            <td><p class="black-hole" id="BlH4"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="Y4">4</p></td>
+            <td><p class="empty-hole" id="Y11">11</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="yellow-hole" id="YH3"></p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="G1">1</p></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 7 -->
+            <td></td>
+            <td><p class="empty-hole" id="R13">13</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="red-hole" id="RH4"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="Bl5">5</p></td>
+            <td><p class="empty-hole" id="B10">10</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="Y5">5</p></td>
+            <td><p class="empty-hole" id="Y10">10</p></td>
+            <td></td>
+            <td><p class="yellow-hole" id="YH4"></p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="G2">2</p></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 8 -->
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="R12">12</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="Bl6">6</p></td>
+            <td><p class="empty-hole" id="Bl9">9</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="Y6">6</p></td>
+            <td><p class="empty-hole" id="Y9">9</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="G3">3</p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 9 -->
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="R11">11</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="Bl7">7</p></td>
+            <td><p class="empty-hole" id="Bl8">8</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="Y7">7</p></td>
+            <td><p class="empty-hole" id="Y8">8</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="G4">4</p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 10 -->
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="R10">10</p></td>
+            <td><p class="empty-hole" id="R9">9</p></td>
+            <td><p class="empty-hole" id="R8">8</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="G7">7</p></td>
+            <td><p class="empty-hole" id="G6">6</p></td>
+            <td><p class="empty-hole" id="G5">5</p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 11 -->
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="R5">5</p></td>
+            <td><p class="empty-hole" id="R6">6</p></td>
+            <td><p class="empty-hole" id="R7">7</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="G8">8</p></td>
+            <td><p class="empty-hole" id="G9">9</p></td>
+            <td><p class="empty-hole" id="G10">10</p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 12 -->
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="R4">4</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="B8">8</p></td>
+            <td><p class="empty-hole" id="B7">7</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="W8">8</p></td>
+            <td><p class="empty-hole" id="W7">7</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="G11">11</p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 13 -->
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="R3">3</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="B9">9</p></td>
+            <td><p class="empty-hole" id="B6">6</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="W9">9</p></td>
+            <td><p class="empty-hole" id="W6">6</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="G12">12</p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 14 -->
+            <td></td>
+            <td><p class="empty-hole" id="R2">2</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="blue-hole" id="BH4"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="B10">10</p></td>
+            <td><p class="empty-hole" id="B5">5</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="W10">10</p></td>
+            <td><p class="empty-hole" id="W5">5</p></td>
+            <td></td>
+            <td><p class="green-hole" id="GH4"></p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="G13">13</p></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 15 -->
+            <td></td>
+            <td><p class="empty-hole" id="R1">1</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="blue-hole" id="BH3"></p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="B11">11</p></td>
+            <td><p class="empty-hole" id="B4">4</p></td>
+            <td></td>
+            <td><p class="white-hole" id="WH4"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="W11">11</p></td>
+            <td><p class="empty-hole" id="W4">4</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="green-hole" id="GH3"></p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="G14">14</p></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 16 -->
+            <td></td>
+            <td><p class="empty-hole" id="B0">0</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="blue-hole" id="BH2"></p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="B12">12</p></td>
+            <td><p class="empty-hole" id="B3">3</p></td>
+            <td></td>
+            <td><p class="white-hole" id="WH3"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="W12">12</p></td>
+            <td><p class="empty-hole" id="W3">3</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="green-hole" id="GH2"></p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="G15">15</p></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 17 -->
+            <td><p class="blue-piece" id="BP1"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="B17">17</p></td>
+            <td><p class="blue-hole" id="BH1"></p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="B13">13</p></td>
+            <td></td>
+            <td><p class="empty-hole" id="B2">2</p></td>
+            <td></td>
+            <td><p class="white-hole" id="WH2"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="W13">13</p></td>
+            <td></td>
+            <td><p class="empty-hole" id="W2">2</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="green-hole" id="GH1"></p></td>
+            <td><p class="empty-hole" id="G16">16</p></td>
+            <td></td>
+            <td><p class="green-piece" id="GP4"></p></td>
+          </tr>
+          <tr>
+            <!-- 18 -->
+            <td></td>
+            <td><p class="blue-piece" id="BP2"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="B16">16</p></td>
+            <td></td>
+            <td><p class="empty-hole" id="B14">14</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="B1">1</p></td>
+            <td></td>
+            <td><p class="white-hole" id="WH1"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="W14">14</p></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="W1">1</p></td>
+            <td></td>
+            <td><p class="empty-hole" id="G17">17</p></td>
+            <td></td>
+            <td><p class="green-piece" id="GP3"></p></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 19 -->
+            <td></td>
+            <td></td>
+            <td><p class="blue-piece" id="BP3"></p></td>
+            <td></td>
+            <td><p class="empty-hole" id="B15">15</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="W0">0</p></td>
+            <td><p class="empty-hole" id="W17">17</p></td>
+            <td></td>
+            <td><p class="empty-hole" id="W16">16</p></td>
+            <td><p class="empty-hole" id="W15">15</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="empty-hole" id="G0">0</p></td>
+            <td></td>
+            <td><p class="green-piece" id="GP2"></p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <!-- 20 -->
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="blue-piece" id="BP4"></p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="white-piece" id="WP1"></p></td>
+            <td><p class="white-piece" id="WP2"></p></td>
+            <td></td>
+            <td><p class="white-piece" id="WP3"></p></td>
+            <td><p class="white-piece" id="WP4"></p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><p class="green-piece" id="GP1"></p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </main>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="main.js"></script>
+
+  </body>
 </html>
