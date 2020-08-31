@@ -47,12 +47,29 @@ td {
     background-color: red;
     border-radius: 10px;
 }
+
+.red-piece {
+    width: 0px;
+    height: 0px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid red;
+}
+
 .black-hole {
     width: 10px;
     height: 10px;
     padding: 6px;
     background-color: black;
     border-radius: 10px;
+}
+
+.black-piece {
+    width: 0px;
+    height: 0px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid black;
 }
 
 .yellow-hole {
@@ -63,12 +80,28 @@ td {
     border-radius: 10px;
 }
 
+.yellow-piece {
+    width: 0px;
+    height: 0px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid yellow;
+}
+
 .green-hole {
     width: 10px;
     height: 10px;
     padding: 6px;
     background-color: green;
     border-radius: 10px;
+}
+
+.green-piece {
+    width: 0px;
+    height: 0px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid green;
 }
 
 .white-hole {
@@ -79,12 +112,28 @@ td {
     border-radius: 10px;
 }
 
+.white-piece {
+    width: 0px;
+    height: 0px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid white;
+}
+
 .blue-hole {
     width: 10px;
     height: 10px;
     padding: 6px;
     background-color: blue;
     border-radius: 10px;
+}
+
+.blue-piece {
+    width: 0px;
+    height: 0px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid blue;
 }
 
 p {
@@ -137,13 +186,6 @@ span {
         height: 12vw;
     }
 
-    .red-turn-text {
-        font-size: 40px;
-    }
-    
-    .black-turn-text {
-        font-size: 40px;
-    }
 
     table {
         margin: 0;

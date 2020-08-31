@@ -1,8 +1,9 @@
 class player {
-    constructor(hand, colour, partner){
+    constructor(hand, colour, partner, pieces){
         this.hand = hand;
         this.colour = colour;
-        this.partner = partner
+        this.partner = partner;
+        this.pieces = pieces;
     }
 
     setHand(newHand){ this.hand = newHand;}
