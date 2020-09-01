@@ -10,12 +10,15 @@ main {
     height: 100vh;
 }
 
+
 #menu{
     text-align: center; 
+    justify-items: center;
 }
 
 #lobby{
 text-align: center;
+
 }
 
 #inGame{

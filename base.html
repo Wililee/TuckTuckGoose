@@ -6,11 +6,12 @@
   </head>
 
   <body>
+      <!--place to enter name-->
+      <div id = 'getName'>
+        <input id="enterName" placeholder="Enter name" />
+      </div>
 
     <div id="menu">
-      <!--place to enter name-->
-      <input id="enterName" placeholder="Enter name" />
-
       <!--Create lobby-->
       <button id="createLobby">Create</button>
 
@@ -22,7 +23,9 @@
     </div>
 
     <div id="lobby">
-      <button id = "startGame">Everyone is In!</button>
+      <button id="startGame">Everyone is In!</button>
+      <p>Room ID :</p>
+      <p id = "displayRoomID"></p>
     </div>
 
     <div id="inGame">
@@ -512,8 +515,12 @@
       </main>
     </div>
 
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="main.js"></script>
+    <script src="server.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
 
   </body>
 </html>

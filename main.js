@@ -1,7 +1,23 @@
 /*---LOBBY SETUP---*/
-//disabiling game and lobby
-document.getElementById("inGame").style.display = "none";
-document.getElementById("lobby").style.display = "none";
+
+//disabiling some screens
+$('#inGame').hide();
+$('#lobby').hide();
+$('#menu').hide();
+
+//Setting up name
+$('#enterName').focus();
+$('#enterName').on("keyup", function (key)  {
+    if (key.keyCode == 13){ 
+    key.preventDefault();
+    console.log("hi");
+    socket.emit('setName', $('#enterName').val());
+    $('#getName').hide();
+    $('#menu').show();
+    }
+});
+
+
 
 //Swapping between menu and a lobby
 function goToLobby() {
@@ -23,8 +39,6 @@ document.getElementById("joinLobby").onclick = goToLobby;
 
 //Create lobby button
 document.getElementById("createLobby").onclick = goToLobby;
-
-
 
 /* --- GAME SETUP ---*/
 //Initial player properties
@@ -113,33 +127,13 @@ function StartTurn() {
   turn = true;
 }
 
-function getPieceX(){
-    return 4
-}
-
-function getPieceC(){
-    return "B"
-}
-
-//assuming its not being moved out of home hole
-function movePiece(pieceID,holeID) {
-    document.getElementById(pieceID).innerHTML = `<p class = "empty-hole" id = "${getPieceC + getPieceX}"></p>`
-    document.getElementById(holeID).innerHTML = `<p class = "red-piece" id = "${pieceID}" ></p>`
-    
-}
-
-movePiece("RP1", "B3")
-
 //getting piece out
-function releasePiece(pieceID){
-    
-}
+function releasePiece(pieceID) {}
 
 //Highlight selected piece
-function highlightPiece(pieceID){
-    document.getElementById(pieceID).style.border = "2px solid purple"
+function highlightPiece(pieceID) {
+  document.getElementById(pieceID).style.border = "2px solid purple";
 }
-
 
 function makeMove() {
   //if isValidMove
