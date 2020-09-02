@@ -1,54 +1,59 @@
 /*---LOBBY SETUP---*/
 
-
-
 //disabiling some screens
-$('#inGame').hide();
-$('#lobby').hide();
-$('#menu').hide();
+$("#inGame").hide();
+$("#lobby").hide();
+$("#menu").hide();
 
 //Setting up name
-$('#enterName').focus();
-$('#enterName').on('keyup',  (key) => {
-    if (key.keyCode == 13){ 
+$("#enterName").focus();
+$("#enterName").on("keyup", (key) => {
+  if (key.keyCode == 13) {
     key.preventDefault();
-    socket.emit('setName', $('#enterName').val());
-    $('#getName').hide();
-    $('#menu').show();
-  
-    }
+    socket.name = $("#enterName").val();
+    socket.emit("setName", $("#enterName").val());
+    $("#getName").hide();
+    $("#menu").show();
+  }
 });
 
 //Creating a Lobby
-$('#createLobby').focus();
-$('#createLobby').on('click', ((event) => joinLobby(event, getNewCode(), 'createlobby')));
+$("#createLobby").focus();
+$("#createLobby").on("click", (event) =>
+  joinLobby(event, getNewCode(), "createlobby")
+);
 
 //randomly generated room code
-function getNewCode(){
-  return 1234;
+function getNewCode() {
+  return Math.floor(Math.random() * 10000 + 1);
 }
+
+//click the join lobby
+$("#joinLobby").on("click", (event) =>
+  joinLobby(event, $("#enterCode").val(), "joinlobby")
+);
 
 //Joining a created lobby
-function joinLobby (event, roomID, action){
+function joinLobby(event, roomID, action) {
+  //move to the lobby screen
+  $("#menu").hide();
+  $("#lobby").show();
+  $("#displayRoomID").html(roomID);
   //only allow lobby owner to start game
-  if (action === 'createlobby')
-    $('#startGame').show()
-  else
-    $('#startGame').hide()
-
-  socket.emit('createlobby', (roomID));
+  if (action === "createlobby") {
+    socket.emit("createlobby", roomID);
+    $("#startGame").show();
+  }
+  else {
+    $("#startGame").hide();
+    socket.emit('joinlobby', roomID)
+  } 
+  
 }
 
-
-
-//Swapping between menu and a lobby
-function goToLobby() {
-  document.getElementById("lobby").style.display = "block";
-  document.getElementById("menu").style.display = "none";
-
-  //startGame button
-  document.getElementById("startGame").onclick = goToGame;
-}
+socket.on('playerJoined',(data) =>{
+$('#playerNames').append($('<li>').text(data));
+})
 
 //Going into a Game
 function goToGame() {
@@ -66,6 +71,7 @@ document.getElementById("createLobby").onclick = goToLobby;
 //Initial player properties
 var turn = false;
 var hand;
+var name;
 var pieces;
 var partner;
 var colour;

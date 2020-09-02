@@ -6,10 +6,10 @@
   </head>
 
   <body>
-      <!--place to enter name-->
-      <div id = 'getName'>
-        <input id="enterName" placeholder="Enter name" />
-      </div>
+    <!--place to enter name-->
+    <div id="getName">
+      <input id="enterName" placeholder="Enter name" />
+    </div>
 
     <div id="menu">
       <!--Create lobby-->
@@ -23,9 +23,20 @@
     </div>
 
     <div id="lobby">
-      <button id="startGame">Everyone is In!</button>
-      <p>Room ID :</p>
-      <p id = "displayRoomID"></p>
+      <div>
+        <button id="startGame">Everyone is In!</button>
+        <p>Room ID :</p>
+        <p id="displayRoomID"></p>
+      </div>
+      <div>
+        <button id = "whiteBtn">White</button>
+        <button id = "blueBtn">Blue</button>
+        <button id = "redBtn">Red</button>
+        <button id = "blackBtn">Black</button>
+        <button id = "yellowBtn">Yellow</button>
+        <button id = "greenBtn">Green</button>
+      </div>
+      <div id = 'playerNames'></div>
     </div>
 
     <div id="inGame">
@@ -515,16 +526,11 @@
       </main>
     </div>
 
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io();
     </script>
     <script src="main.js"></script>
-    
-    
-
-
   </body>
 </html>
