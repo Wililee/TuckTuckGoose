@@ -1,26 +1,31 @@
-var app = require("express")();
-const PORT = process.env.PORT || 3000;
-var socket = require("socket.io");
+// var app = require("express")();
+// const PORT = process.env.PORT || 3000;
+// var socket = require("socket.io");
 
-var server = app.listen(PORT, () => {
-    console.log("Listening on " + PORT);
+var express = require("express");
+var app = express();
+const port = process.env.PORT || 3001;
+var server = app.listen(port, () => {
+  console.log("Listening on:" + port);
 });
+var io = require("socket.io").listen(server);
 
-var io = socket(server);
-
+app.use(express.static(__dirname + '/public'));
+app.get('/', function(req, res){
+  res.sendFile(__dirname+'/public/'); 
+});
 
 const rooms = {};
 
-
-io.sockets.on("connection", (socket) => {
-  console.log("ayy");
-  
+io.on("connect", (socket) => {
   //setting the name of the player to the inputted text field
   socket.on("setName", (data) => {
     socket.name = data;
+    return false;
   });
 });
-  /*
+
+/*
   //Creating a new room when create button is clicked
   socket.on("createLobby", (roomID) => {
     const room = {

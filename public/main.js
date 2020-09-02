@@ -1,21 +1,26 @@
 /*---LOBBY SETUP---*/
 
+
+
 //disabiling some screens
 $('#inGame').hide();
 $('#lobby').hide();
 $('#menu').hide();
 
 //Setting up name
+
 $('#enterName').focus();
-$('#enterName').on("keyup", function (key)  {
+$('#enterName').on('keyup',  (key) => {
     if (key.keyCode == 13){ 
     key.preventDefault();
     console.log("hi");
     socket.emit('setName', $('#enterName').val());
     $('#getName').hide();
     $('#menu').show();
+  
     }
 });
+
 
 
 
