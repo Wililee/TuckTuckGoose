@@ -8,12 +8,10 @@ $('#lobby').hide();
 $('#menu').hide();
 
 //Setting up name
-
 $('#enterName').focus();
 $('#enterName').on('keyup',  (key) => {
     if (key.keyCode == 13){ 
     key.preventDefault();
-    console.log("hi");
     socket.emit('setName', $('#enterName').val());
     $('#getName').hide();
     $('#menu').show();
@@ -21,6 +19,25 @@ $('#enterName').on('keyup',  (key) => {
     }
 });
 
+//Creating a Lobby
+$('#createLobby').focus();
+$('#createLobby').on('click', ((event) => joinLobby(event, getNewCode(), 'createlobby')));
+
+//randomly generated room code
+function getNewCode(){
+  return 1234;
+}
+
+//Joining a created lobby
+function joinLobby (event, roomID, action){
+  //only allow lobby owner to start game
+  if (action === 'createlobby')
+    $('#startGame').show()
+  else
+    $('#startGame').hide()
+
+  socket.emit('createlobby', (roomID));
+}
 
 
 

@@ -21,15 +21,14 @@ io.on("connect", (socket) => {
   //setting the name of the player to the inputted text field
   socket.on("setName", (data) => {
     socket.name = data;
-    return false;
+    console.log(socket.name + " has joined")
   });
-});
 
-/*
+
   //Creating a new room when create button is clicked
-  socket.on("createLobby", (roomID) => {
+  socket.on("createlobby", (roomID) => {
     const room = {
-      id: "ABCD",
+      id: roomID,
       sockets: [],
     };
     console.log(room.id);
@@ -39,21 +38,23 @@ io.on("connect", (socket) => {
     joinRoom(socket, room);
   });
 
-
-
+  
 //When clicking joinRoom button, joins that room
-socket.on("joinLobby", (roomID, socket) => {
+socket.on("joinlobby", (roomID) => {
   joinRoom(socket, rooms[roomID]);
 });
 
 //Takes in a socket and a room and inserts the player into the room
 const joinRoom = (socket, room) => {
-  rooms.sockets.push(socket); //adds player to list of sockets
+  rooms[room.id].sockets.push(socket); //adds player to list of sockets
   socket.join(room.id, () => {
     socket.roomID = room.id;
-    console.log(socket.id, "Joined", room.id);
+    console.log(socket.name, "Joined", room.id);
   });
 };
+
+});
+/*
 
 const leaveRooms = (socket) => {
   const roomsToDelete = [];
