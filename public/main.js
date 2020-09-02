@@ -19,9 +19,7 @@ $("#enterName").on("keyup", (key) => {
 
 //Creating a Lobby
 $("#createLobby").focus();
-$("#createLobby").on("click", (event) =>
-  joinLobby(event, getNewCode(), "createlobby")
-);
+$("#createLobby").on("click", () => joinLobby(getNewCode(), "createlobby"));
 
 //randomly generated room code
 function getNewCode() {
@@ -29,12 +27,12 @@ function getNewCode() {
 }
 
 //click the join lobby
-$("#joinLobby").on("click", (event) =>
-  joinLobby(event, $("#enterCode").val(), "joinlobby")
+$("#joinLobby").on("click", () =>
+  joinLobby($("#enterCode").val(), "joinlobby")
 );
 
 //Joining a created lobby
-function joinLobby(event, roomID, action) {
+function joinLobby(roomID, action) {
   //move to the lobby screen
   $("#menu").hide();
   $("#lobby").show();
@@ -43,29 +41,29 @@ function joinLobby(event, roomID, action) {
   if (action === "createlobby") {
     socket.emit("createlobby", roomID);
     $("#startGame").show();
-  }
-  else {
+  } else {
     $("#startGame").hide();
-    socket.emit('joinlobby', roomID)
-  } 
-  
+    socket.emit("joinlobby", roomID);
+  }
 }
 
-socket.on('playerJoined',(data) =>{
-$('#playerNames').append($('<li>').text(data));
-})
+  //trying to join a room that doesnt exist
+  socket.on('invalidRoom', () =>{
+    $("#menu").show();
+    $("#lobby").hide();
+    $('#errmsg').text("Invalid Room ID")
+  })
 
-//Going into a Game
-function goToGame() {
-  document.getElementById("inGame").style.display = "block";
-  document.getElementById("lobby").style.display = "none";
-}
+//Displaying player names
+socket.on("playerJoined", (data) => {
+  $("#playerNames").append($("<li>").text(data));
+});
 
-//Join Game button
-document.getElementById("joinLobby").onclick = goToLobby;
+//Setting up player colour
+$("#whiteBtn").on("click", () => {
+  socket.emit('selectCol', "W");
+});
 
-//Create lobby button
-document.getElementById("createLobby").onclick = goToLobby;
 
 /* --- GAME SETUP ---*/
 //Initial player properties

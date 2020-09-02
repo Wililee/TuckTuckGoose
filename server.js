@@ -28,46 +28,42 @@ io.on("connect", (socket) => {
     const room = {
       id: roomID,
       sockets: [],
+      active: false,
     };
     //puts the room in the list of rooms :P
     rooms[room.id] = room;
     //makes them join the room they just created
     joinRoom(socket, room);
   });
-
+  
   //When clicking joinRoom button, joins that room
   socket.on("joinlobby", (roomID) => {
+    if (!rooms[roomID] || rooms[roomID].active){
+      socket.emit('invalidRoom');
+      return;
+    }
     joinRoom(socket, rooms[roomID]);
   });
 
   //Takes in a socket and a room and inserts the player into the room
   const joinRoom = (socket, room) => {
     room.sockets.push(socket); //adds player to list of sockets
-    console.log(room.sockets.length)
     socket.join(room, () => {
       socket.roomID = room.id;
       room.sockets.forEach(s => {
-        s.emit('playerJoined', s.name)
+        socket.emit('playerJoined', s.name)
       });
       console.log(socket.name, "Joined", room.id);
     });
   };
+  
+
+
+  //Gives the player a colour
+  socket.on('selectCol', (colour) =>{
+    socket.colour = colour;
+    console.log(socket.name, "colour:", socket.colour);
+  })
+
 });
-/*
 
-const leaveRooms = (socket) => {
-  const roomsToDelete = [];
-  for (const id in rooms) {
-    const room = rooms[id];
-    //checks if the socket is in that room
-    if (room.socket.includes(socket)) {
-      socket.leave(id);
-      room.socket = room.socket.filter((item) => item !== socket);
-    }
-    //if there is nobody in the room now
-    if (room.socket.length == 0) roomsToDelete.push(room);
-  }
-  for (const room in roomsToDelete) delete rooms[room.id];
-};
-
-*/

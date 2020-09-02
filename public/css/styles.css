@@ -1,258 +1,258 @@
 main {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
 }
 
 * {
-    margin: auto;
+  margin: auto;
 }
 
-#menu{
-    text-align: center; 
-    justify-items: center;
+#menu {
+  text-align: center;
+  justify-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
-#lobby{
-text-align: center;
-display: flex;
-flex-direction: column;
+#lobby {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
-#inGame{
-    text-align: center; 
+#inGame {
+  text-align: center;
 }
 
-#joinLobby, #createLobby, #startGame{
-    font-family: "Muli";
+#joinLobby,
+#createLobby,
+#startGame {
+  font-family: "Muli";
 }
 
 div {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .mobile {
-    display: none;
+  display: none;
 }
 
 .desktop {
-    margin: 0;
-    width: 100%;
+  margin: 0;
+  width: 100%;
 }
 
-
 td {
-    text-align: center;
-    background-color: #BA7A3A;
-    width: 30px;
-    height: 30px;
+  text-align: center;
+  background-color: #ba7a3a;
+  width: 30px;
+  height: 30px;
 }
 
 .empty-hole {
-    width: 10px;
-    height: 10px;
-    padding: 6px;
-    background-color: #86592b;
-    border-radius: 10px;
+  width: 10px;
+  height: 10px;
+  padding: 6px;
+  background-color: #86592b;
+  border-radius: 10px;
 }
 
 .red-hole {
-    width: 10px;
-    height: 10px;
-    padding: 6px;
-    background-color: red;
-    border-radius: 10px;
+  width: 10px;
+  height: 10px;
+  padding: 6px;
+  background-color: red;
+  border-radius: 10px;
 }
 
 .red-piece {
-    width: 0px;
-    height: 0px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 20px solid red;
+  width: 0px;
+  height: 0px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid red;
 }
 
 .black-hole {
-    width: 10px;
-    height: 10px;
-    padding: 6px;
-    background-color: black;
-    border-radius: 10px;
+  width: 10px;
+  height: 10px;
+  padding: 6px;
+  background-color: black;
+  border-radius: 10px;
 }
 
 .black-piece {
-    width: 0px;
-    height: 0px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 20px solid black;
+  width: 0px;
+  height: 0px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid black;
 }
 
 .yellow-hole {
-    width: 10px;
-    height: 10px;
-    padding: 6px;
-    background-color: yellow;
-    border-radius: 10px;
+  width: 10px;
+  height: 10px;
+  padding: 6px;
+  background-color: yellow;
+  border-radius: 10px;
 }
 
 .yellow-piece {
-    width: 0px;
-    height: 0px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 20px solid yellow;
+  width: 0px;
+  height: 0px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid yellow;
 }
 
 .green-hole {
-    width: 10px;
-    height: 10px;
-    padding: 6px;
-    background-color: green;
-    border-radius: 10px;
+  width: 10px;
+  height: 10px;
+  padding: 6px;
+  background-color: green;
+  border-radius: 10px;
 }
 
 .green-piece {
-    width: 0px;
-    height: 0px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 20px solid green;
+  width: 0px;
+  height: 0px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid green;
 }
 
 .white-hole {
-    width: 10px;
-    height: 10px;
-    padding: 6px;
-    background-color: white;
-    border-radius: 10px;
+  width: 10px;
+  height: 10px;
+  padding: 6px;
+  background-color: white;
+  border-radius: 10px;
 }
 
 .white-piece {
-    width: 0px;
-    height: 0px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 20px solid white;
+  width: 0px;
+  height: 0px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid white;
 }
 
 .blue-hole {
-    width: 10px;
-    height: 10px;
-    padding: 6px;
-    background-color: blue;
-    border-radius: 10px;
+  width: 10px;
+  height: 10px;
+  padding: 6px;
+  background-color: blue;
+  border-radius: 10px;
 }
 
 .blue-piece {
-    width: 0px;
-    height: 0px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 20px solid blue;
+  width: 0px;
+  height: 0px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid blue;
 }
 
 p {
-    display: inline-block;
+  display: inline-block;
 }
 
 #divider {
-    font-size: 90px;
-    margin-left: 15px;
-    margin-right: 15px;
+  font-size: 90px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 span {
-    display: inline-block;
+  display: inline-block;
 }
 
 @media screen and (max-width: 560px) {
-    .red-hole {
-        height: 4.5vw;
-        width: 4.5vw;
-    }
+  .red-hole {
+    height: 4.5vw;
+    width: 4.5vw;
+  }
 
-    .black-hole {
-        height: 4.5vw;
-        width: 4.5vw;
-    }
+  .black-hole {
+    height: 4.5vw;
+    width: 4.5vw;
+  }
 
-    .yellow-hole {
-        height: 4.5vw;
-        width: 4.5vw;
-    }
+  .yellow-hole {
+    height: 4.5vw;
+    width: 4.5vw;
+  }
 
-    .green-hole {
-        height: 4.5vw;
-        width: 4.5vw;
-    }
+  .green-hole {
+    height: 4.5vw;
+    width: 4.5vw;
+  }
 
-    .white-hole {
-        height: 4.5vw;
-        width: 4.5vw;
-    }
+  .white-hole {
+    height: 4.5vw;
+    width: 4.5vw;
+  }
 
-    .blue-hole {
-        height: 4.5vw;
-        width: 4.5vw;
-    }
+  .blue-hole {
+    height: 4.5vw;
+    width: 4.5vw;
+  }
 
-    td {
-        width: 12vw;
-        height: 12vw;
-    }
+  td {
+    width: 12vw;
+    height: 12vw;
+  }
 
+  table {
+    margin: 0;
+  }
 
-    table {
-        margin: 0;
-    }
+  .mobile {
+    display: block;
+  }
 
-    .mobile {
-        display: block;
-    }
-
-    .desktop {
-        display: none;
-    }
-
+  .desktop {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 380px) {
-    .red-piece {
-        height: 3vw;
-        width: 3vw;
-    }
+  .red-piece {
+    height: 3vw;
+    width: 3vw;
+  }
 
-    .black-piece {
-        height: 3vw;
-        width: 3vw;
-    }
+  .black-piece {
+    height: 3vw;
+    width: 3vw;
+  }
 }
 
 @media screen and (max-width: 345px) {
-    .red-piece {
-        height: 2.5vw;
-        width: 2.5vw;
-    }
+  .red-piece {
+    height: 2.5vw;
+    width: 2.5vw;
+  }
 
-    .black-piece {
-        height: 2.5vw;
-        width: 2.5vw;
-    }
+  .black-piece {
+    height: 2.5vw;
+    width: 2.5vw;
+  }
 }
 
 @media screen and (max-width: 300px) {
-    .red-piece {
-        height: 1.5vw;
-        width: 1.5vw;
-    }
+  .red-piece {
+    height: 1.5vw;
+    width: 1.5vw;
+  }
 
-    .black-piece {
-        height: 1.5vw;
-        width: 1.5vw;
-    }
-
+  .black-piece {
+    height: 1.5vw;
+    width: 1.5vw;
+  }
 }
