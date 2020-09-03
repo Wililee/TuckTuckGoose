@@ -52,6 +52,7 @@ io.on("connect", (socket) => {
   const joinRoom = (socket, room) => {
     room.sockets.push(socket); //adds player to list of sockets
     socket.join(room, () => {
+      socket.room = room;
       socket.roomID = room.id;
       room.sockets.forEach(s => {
         socket.emit('playerJoined', s.name)
@@ -60,7 +61,7 @@ io.on("connect", (socket) => {
       //assign each player their colour
       socket.colour = assignCol(room.id);
       socket.emit('disableColBtns', room.chosenColours)
-      socket.broadcast.emit('disableColBtns', room.chosenColours);
+      socket.broadcast.in(room).emit('disableColBtns', room.chosenColours);
       console.log(socket.name, "Joined", room.id);
     });
   };
@@ -98,11 +99,8 @@ io.on("connect", (socket) => {
     
     console.log(socket.name, "colour:", socket.colour);
 
-    // rooms[socket.roomID].sockets.forEach(() => {
-    //   socket.emit('disableColBtns', rooms[socket.roomID].chosenColours);
-    // });
   socket.emit('disableColBtns', rooms[socket.roomID].chosenColours);
-  socket.broadcast.emit('disableColBtns', rooms[socket.roomID].chosenColours);
+  socket.broadcast.in(socket.room).emit('disableColBtns', rooms[socket.roomID].chosenColours);
 
   })
 
