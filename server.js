@@ -30,7 +30,12 @@ io.on("connect", (socket) => {
       sockets: [],
       active: false,
       chosenColours: {
-        W: false, B: false, R: false, Bl: false, Y: false 
+        W: false,
+        B: false,
+        R: false,
+        Bl: false,
+        Y: false,
+        G: false,
       },
     };
     //puts the room in the list of rooms :P
@@ -38,11 +43,15 @@ io.on("connect", (socket) => {
     //makes them join the room they just created
     joinRoom(socket, room);
   });
-  
+
   //When clicking joinRoom button, joins that room
   socket.on("joinlobby", (roomID) => {
-    if (!rooms[roomID] || rooms[roomID].active){
-      socket.emit('invalidRoom');
+    if (
+      !rooms[roomID] ||
+      rooms[roomID].active ||
+      rooms[roomID].sockets.length >= 6
+    ) {
+      socket.emit("invalidRoom");
       return;
     }
     joinRoom(socket, rooms[roomID]);
@@ -54,55 +63,100 @@ io.on("connect", (socket) => {
     socket.join(room, () => {
       socket.room = room;
       socket.roomID = room.id;
-      room.sockets.forEach(s => {
-        socket.emit('playerJoined', s.name)
-      })
-      socket.broadcast.in(room).emit('playerJoined', socket.name)
+      room.sockets.forEach((s) => {
+        socket.emit("playerJoined", s.name);
+      });
+      socket.broadcast.in(room).emit("playerJoined", socket.name);
       //assign each player their colour
       socket.colour = assignCol(room.id);
-      socket.emit('disableColBtns', room.chosenColours)
-      socket.broadcast.in(room).emit('disableColBtns', room.chosenColours);
+      socket.emit("disableColBtns", room.chosenColours);
+      socket.broadcast.in(room).emit("disableColBtns", room.chosenColours);
       console.log(socket.name, "Joined", room.id);
+      //check if there are 6 people in
+      if (room.sockets.length === 6)
+        socket.broadcast.in(room).emit("enableGameStart");
     });
   };
-  
+
   //assigns a player a colour based on avalible colours
-  function assignCol (roomID){
-    if (rooms[roomID].chosenColours.W == false) {rooms[roomID].chosenColours.W = true; return "W"}
-    if (rooms[roomID].chosenColours.B == false) {rooms[roomID].chosenColours.B = true; return "B"}
-    if (rooms[roomID].chosenColours.R == false) {rooms[roomID].chosenColours.R = true; return "R"}
-    if (rooms[roomID].chosenColours.Bl == false) {rooms[roomID].chosenColours.Bl = true; return "Bl"}
-    if (rooms[roomID].chosenColours.Y == false) {rooms[roomID].chosenColours.Y = true; return "Y"}
-    if (rooms[roomID].chosenColours.G == false) {rooms[roomID].chosenColours.G = true; return "G"}
+  function assignCol(roomID) {
+    if (rooms[roomID].chosenColours.W == false) {
+      rooms[roomID].chosenColours.W = true;
+      return "W";
+    }
+    if (rooms[roomID].chosenColours.B == false) {
+      rooms[roomID].chosenColours.B = true;
+      return "B";
+    }
+    if (rooms[roomID].chosenColours.R == false) {
+      rooms[roomID].chosenColours.R = true;
+      return "R";
+    }
+    if (rooms[roomID].chosenColours.Bl == false) {
+      rooms[roomID].chosenColours.Bl = true;
+      return "Bl";
+    }
+    if (rooms[roomID].chosenColours.Y == false) {
+      rooms[roomID].chosenColours.Y = true;
+      return "Y";
+    }
+    if (rooms[roomID].chosenColours.G == false) {
+      rooms[roomID].chosenColours.G = true;
+      return "G";
+    }
   }
 
-
   //Gives the player a colour
-  socket.on('selectCol', (colour) =>{
-    var c = rooms[socket.roomID].chosenColours
+  socket.on("selectCol", (colour) => {
+    var c = rooms[socket.roomID].chosenColours;
 
     //unselects the colour
     if (socket.colour == "W") c.W = false;
-    if (socket.colour == "B") c.B = false;
-    if (socket.colour == "R") c.R = false;
-    if (socket.colour == "Bl") c.Bl = false;
-    if (socket.colour == "Y") c.Y = false;
-    if (socket.colour == "G") c.G = false;
+    else if (socket.colour == "B") c.B = false;
+    else if (socket.colour == "R") c.R = false;
+    else if (socket.colour == "Bl") c.Bl = false;
+    else if (socket.colour == "Y") c.Y = false;
+    else if (socket.colour == "G") c.G = false;
 
     socket.colour = colour;
     if (socket.colour == "W") c.W = true;
-    if (socket.colour == "B") c.B = true;
-    if (socket.colour == "R") c.R = true;
-    if (socket.colour == "Bl") c.Bl = true;
-    if (socket.colour == "Y") c.Y = true;
-    if (socket.colour == "G") c.G = true;
-    
-    console.log(socket.name, "colour:", socket.colour);
+    else if (socket.colour == "B") c.B = true;
+    else if (socket.colour == "R") c.R = true;
+    else if (socket.colour == "Bl") c.Bl = true;
+    else if (socket.colour == "Y") c.Y = true;
+    else if (socket.colour == "G") c.G = true;
 
-  socket.emit('disableColBtns', rooms[socket.roomID].chosenColours);
-  socket.broadcast.in(socket.room).emit('disableColBtns', rooms[socket.roomID].chosenColours);
+    socket.emit("disableColBtns", rooms[socket.roomID].chosenColours);
+    socket.broadcast
+      .in(socket.room)
+      .emit("disableColBtns", rooms[socket.roomID].chosenColours);
+  });
 
-  })
+  socket.on("startGame", () => {
+    room = socket.room;
+    //Assign partners (bl-w,r-g,b-y)
+    for (s in room.sockets) {
+      if (s.colour === "W") {
+        s.partner = findSocketWithCol("Bl");
+        findSocketWithCol("Bl").partner = s;
+      } else if (s.colour === "R") {
+        s.partner = findSocketWithCol("G");
+        findSocketWithCol("G").partner = s;
+      } else if (s.colour === "B") {
+        s.partner = findSocketWithCol("Y");
+        findSocketWithCol("Y").partner = s;
+      }
+    }
+    //change to the start screen
+    socket.emit("displayGame");
+    socket.broadcast.in(room).emit("displayGame");
 
+    //give out initial hand w/deck (create deck obj)
+
+    //display individual hand
+  });
+
+  function findSocketWithCol(room, c) {
+    for (s in room.sockets) if (s.colour === c) return s;
+  }
 });
-

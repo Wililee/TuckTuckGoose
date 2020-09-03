@@ -81,7 +81,6 @@ $("#greenBtn").on("click", () => {
 
 //disabiling selected colours
 socket.on("disableColBtns", (colours) => {
-  console.log(colours);
   //enable all then disable the ones that are taken
   $("#whiteBtn").attr("disabled", false);
   $("#blueBtn").attr("disabled", false);
@@ -92,10 +91,25 @@ socket.on("disableColBtns", (colours) => {
   if (colours.W === true) $("#whiteBtn").attr("disabled", true);
   if (colours.B === true) $("#blueBtn").attr("disabled", true);
   if (colours.R === true) $("#redBtn").attr("disabled", true);
-  if (colours.Bl=== true) $("#blackBtn").attr("disabled", true);
+  if (colours.Bl === true) $("#blackBtn").attr("disabled", true);
   if (colours.Y === true) $("#yellowBtn").attr("disabled", true);
   if (colours.G === true) $("#greenBtn").attr("disabled", true);
 });
+
+
+//Enable StartGame
+socket.on('enableGameStart', ()=>{
+  $('#startGame').attr("disabled", false);
+})
+
+$('#startGame').on('click', ()=>{
+  socket.emit("startGame")
+})
+
+socket.on('displayGame',()=>{
+  $('#lobby').hide()
+  $('#inGame').show()
+})
 
 /* --- GAME SETUP ---*/
 //Initial player properties

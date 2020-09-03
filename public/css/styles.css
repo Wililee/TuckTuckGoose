@@ -54,6 +54,31 @@ td {
   height: 30px;
 }
 
+.white-button {
+    background-color: white;
+}
+
+.blue-button {
+    background-color: blue;
+}
+
+.red-button {
+    background-color: red;
+}
+
+.black-button {
+    background-color: black;
+    color: white;
+}
+
+.yellow-button {
+    background-color: yellow;
+}
+
+.green-button {
+    background-color: green;
+}
+
 .empty-hole {
   width: 10px;
   height: 10px;
