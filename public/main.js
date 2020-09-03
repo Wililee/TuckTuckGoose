@@ -47,12 +47,12 @@ function joinLobby(roomID, action) {
   }
 }
 
-  //trying to join a room that doesnt exist
-  socket.on('invalidRoom', () =>{
-    $("#menu").show();
-    $("#lobby").hide();
-    $('#errmsg').text("Invalid Room ID")
-  })
+//trying to join a room that doesnt exist
+socket.on("invalidRoom", () => {
+  $("#menu").show();
+  $("#lobby").hide();
+  $("#errmsg").text("Invalid Room ID");
+});
 
 //Displaying player names
 socket.on("playerJoined", (data) => {
@@ -61,9 +61,41 @@ socket.on("playerJoined", (data) => {
 
 //Setting up player colour
 $("#whiteBtn").on("click", () => {
-  socket.emit('selectCol', "W");
+  socket.emit("selectCol", "W");
+});
+$("#blueBtn").on("click", () => {
+  socket.emit("selectCol", "B");
+});
+$("#redBtn").on("click", () => {
+  socket.emit("selectCol", "R");
+});
+$("#blackBtn").on("click", () => {
+  socket.emit("selectCol", "Bl");
+});
+$("#yellowBtn").on("click", () => {
+  socket.emit("selectCol", "Y");
+});
+$("#greenBtn").on("click", () => {
+  socket.emit("selectCol", "G");
 });
 
+//disabiling selected colours
+socket.on("disableColBtns", (colours) => {
+  console.log(colours);
+  //enable all then disable the ones that are taken
+  $("#whiteBtn").attr("disabled", false);
+  $("#blueBtn").attr("disabled", false);
+  $("#redBtn").attr("disabled", false);
+  $("#blackBtn").attr("disabled", false);
+  $("#yellowBtn").attr("disabled", false);
+  $("#greenBtn").attr("disabled", false);
+  if (colours.W === true) $("#whiteBtn").attr("disabled", true);
+  if (colours.B === true) $("#blueBtn").attr("disabled", true);
+  if (colours.R === true) $("#redBtn").attr("disabled", true);
+  if (colours.Bl=== true) $("#blackBtn").attr("disabled", true);
+  if (colours.Y === true) $("#yellowBtn").attr("disabled", true);
+  if (colours.G === true) $("#greenBtn").attr("disabled", true);
+});
 
 /* --- GAME SETUP ---*/
 //Initial player properties
