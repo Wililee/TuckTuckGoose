@@ -156,20 +156,32 @@ io.on("connect", (socket) => {
   //initalize player hands
   socket.on("initHand", (hand) => {
     socket.hand = hand;
+    socket.drawFlag = false;
   });
 
   //get a deck from a socket and sets all other sockets deck to it
   socket.on("getDeck", (deck) => {
     socket.deck = deck;
     //set everyones deck to the same one
-    io.in(socket.room).emit("setDeck", socket.deck);
+    io.in(socket.room).emit("setDeck", deck);
   });
 
   function dealOutCards(room, deck, numCards) {
-    for (var i = 0; i <= numCards; i++) io.in(room).emit("takeTopCard", deck); //takes top card and updates everyones deck
+    for (var i = 0; i <= numCards; i++) {
+      //trigger the draw event for every socket
+      room.sockets.forEach((s) => {
+        io.in(room).emit("takeTopCard", s.name); //takes top card and updates everyones deck
+      });
+    }
   }
+
+  socket.on("takeTopCardOffDeckForAll", () => {
+    io.in(socket.room).emit("removeTopCard");
+  });
 
   function findSocketWithCol(room, c) {
     for (s in room.sockets) if (s.colour === c) return s;
   }
 });
+
+///give players cards from just one sockets deeck then update everyones deck

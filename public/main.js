@@ -17,8 +17,8 @@ class Deck {
       this.cards.push(new Card("diamond", i));
       this.cards.push(new Card("spade", i));
     }
-    this.cards.push("joker", 20);
-    this.cards.push("joker", 20);
+    this.cards.push(new Card("joker", 20));
+    this.cards.push(new Card("joker", 20));
     //this.cards.sort(Math.random() - 0.5);
   }
 
@@ -62,10 +62,11 @@ $("#enterName").focus();
 $("#enterName").on("keyup", (key) => {
   if (key.keyCode == 13) {
     key.preventDefault();
+    name = $("#enterName").val();
     socket.name = $("#enterName").val();
     socket.emit("setName", $("#enterName").val());
     $("#getName").hide();
-    $("#menu").show();
+    $("#menu").show(); 
   }
 });
 
@@ -163,7 +164,7 @@ $("#startGame").on("click", () => {
 //let turn = false;
 deck = new Deck();
 hand = new Hand([]);
-// let name;
+let name;
 // let pieces;
 // let partner;
 // let colour;
@@ -200,11 +201,15 @@ socket.on("setDeck", (newDeck) => {
   deck = newDeck;
 });
 
-socket.on('takeTopCard',()=>{
-  
+socket.on('takeTopCard',(n)=>{
+  if (n === name){
   hand.addCard(deck.draw());
-  //socket.emit('giveTopCard', temp)
   socket.emit('getDeck', deck);
+  }
+})
+
+socket.on('removeTopCard', ()=>{
+  deck.draw();
 })
 
 
