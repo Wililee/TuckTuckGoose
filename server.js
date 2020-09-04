@@ -1,7 +1,3 @@
-// var app = require("express")();
-// const PORT = process.env.PORT || 3000;
-// var socket = require("socket.io");
-
 var express = require("express");
 var app = express();
 const port = process.env.PORT || 3001;
@@ -38,6 +34,7 @@ io.on("connect", (socket) => {
         G: false,
       },
     };
+
     //puts the room in the list of rooms :P
     rooms[room.id] = room;
     //makes them join the room they just created
@@ -69,12 +66,11 @@ io.on("connect", (socket) => {
       socket.broadcast.in(room).emit("playerJoined", socket.name);
       //assign each player their colour
       socket.colour = assignCol(room.id);
-      socket.emit("disableColBtns", room.chosenColours);
-      socket.broadcast.in(room).emit("disableColBtns", room.chosenColours);
+      io.in(room).emit("disableColBtns", room.chosenColours);
       console.log(socket.name, "Joined", room.id);
       //check if there are 6 people in
-      if (room.sockets.length === 6)
-        socket.broadcast.in(room).emit("enableGameStart");
+      //if (room.sockets.length === 6)
+      socket.broadcast.in(room).emit("enableGameStart");
     });
   };
 
@@ -147,14 +143,31 @@ io.on("connect", (socket) => {
         findSocketWithCol("Y").partner = s;
       }
     }
+
     //change to the start screen
-    socket.emit("displayGame");
-    socket.broadcast.in(room).emit("displayGame");
+    io.in(room).emit("displayGame");
+    socket.emit("getNewDeck");
 
-    //give out initial hand w/deck (create deck obj)
+    dealOutCards(room, socket.deck, 5);
 
-    //display individual hand
+    io.in(room).emit("displayCards");
   });
+
+  //initalize player hands
+  socket.on("initHand", (hand) => {
+    socket.hand = hand;
+  });
+
+  //get a deck from a socket and sets all other sockets deck to it
+  socket.on("getDeck", (deck) => {
+    socket.deck = deck;
+    //set everyones deck to the same one
+    io.in(socket.room).emit("setDeck", socket.deck);
+  });
+
+  function dealOutCards(room, deck, numCards) {
+    for (var i = 0; i <= numCards; i++) io.in(room).emit("takeTopCard", deck); //takes top card and updates everyones deck
+  }
 
   function findSocketWithCol(room, c) {
     for (s in room.sockets) if (s.colour === c) return s;

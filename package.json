@@ -5,5 +5,9 @@
         "express": "^4.15.2",
         "jquery": "^3.5.1",
         "socket.io": "^2.3.0"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.3"
     }
 }

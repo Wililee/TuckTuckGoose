@@ -1,5 +1,57 @@
-/*---LOBBY SETUP---*/
+class Card {
+  constructor(suite, value) {
+    this.suite = suite;
+    this.value = value;
+  }
+  getString(){
+    return toString(this.suite) + toString(this.value)
+  }
+}
 
+class Deck {
+  constructor() {
+    this.cards = [];
+    for (var i = 1; i <= 13; i++) {
+      this.cards.push(new Card("club", i));
+      this.cards.push(new Card("heart", i));
+      this.cards.push(new Card("diamond", i));
+      this.cards.push(new Card("spade", i));
+    }
+    this.cards.push("joker", 20);
+    this.cards.push("joker", 20);
+    //this.cards.sort(Math.random() - 0.5);
+  }
+
+  draw() {
+    return this.cards.pop();
+  }
+
+  size() {
+    return this.cards.size();
+  }
+
+  //add a reset function
+}
+class Hand {
+  constructor(cards) {
+    this.cards = cards;
+  }
+
+  remove(c) {
+    return this.cards.pop(c);
+  }
+
+  hasCard(c) {
+    for (i in this.cards) if (i == c) return true;
+  }
+
+  addCard(c) {
+    this.cards.push(c);
+  }
+
+}
+
+/*---LOBBY SETUP---*/
 //disabiling some screens
 $("#inGame").hide();
 $("#lobby").hide();
@@ -96,134 +148,84 @@ socket.on("disableColBtns", (colours) => {
   if (colours.G === true) $("#greenBtn").attr("disabled", true);
 });
 
-
 //Enable StartGame
-socket.on('enableGameStart', ()=>{
-  $('#startGame').attr("disabled", false);
-})
+socket.on("enableGameStart", () => {
+  $("#startGame").attr("disabled", false);
+});
 
-$('#startGame').on('click', ()=>{
-  socket.emit("startGame")
-})
+$("#startGame").on("click", () => {
+  socket.emit("startGame");
+});
 
-socket.on('displayGame',()=>{
-  $('#lobby').hide()
-  $('#inGame').show()
-})
 
 /* --- GAME SETUP ---*/
 //Initial player properties
-var turn = false;
-var hand;
-var name;
-var pieces;
-var partner;
-var colour;
-var selectedPiece = {
-  pieceID: 0,
-  colour: null,
-  x: -1,
-};
-var selectedCard = {
-  cardID: 0,
-  suite: null,
-  value: null,
-  actions: null,
-};
+//let turn = false;
+deck = new Deck();
+hand = new Hand([]);
+// let name;
+// let pieces;
+// let partner;
+// let colour;
+// let board;
+// let selectedPiece = {
+//   pieceID: 0,
+//   colour: null,
+//   x: -1,
+// };
+// let selectedCard = {
+//   cardID: 0,
+//   suite: null,
+//   value: null,
+//   actions: null,
+// };
 //the action is default set to just move after everytime
 //m - move  r - release s - swap
-var selectedAction = "m";
+//var selectedAction = "m";
 
-//give event listeners for cards
-function giveCardEventListeners() {
-  for (let i = 0; i < hand.length; i++)
-    hand[i].addEventListener("click", selectCard(hand[i]));
-}
+//going to game veiw
+socket.on("displayGame", () => {
+  $("#lobby").hide();
+  $("#inGame").show();
+  socket.emit('initHand', hand)
+});
 
-function selectCard(card) {
-  selectedCard.suite = card.suite;
-  selectedCard.value = card.value;
-  selectedCard.cardID = cardID;
-  if (((card.value = 1), 11, 13, 20)) giveActionEventListener(card);
-  else {
-    selectedAction = "m";
-    givePieceEventListeners();
-  }
-}
 
-//removing action listeners for cards
-function removeCardEventListener() {
-  for (let i = 0; i < hand.length; i++)
-    hand[i].removeEventListener("click", selectCard(hand[i]));
-}
+//deck setup
+socket.on("getNewDeck", () => {
+  socket.emit("getDeck", deck);
+});
 
-//give Event listener for action
-function giveActionEventListener(card) {
-  for (let i = 0; i < card.actions.length; i++)
-    card.actions[i].addEventListener("click", selectAction(card.actions[i]));
-}
+socket.on("setDeck", (newDeck) => {
+  deck = newDeck;
+});
 
-function selectAction(action) {
-  selectedAction = action;
-  givePieceEventListeners();
-}
+socket.on('takeTopCard',()=>{
+  
+  hand.addCard(deck.draw());
+  //socket.emit('giveTopCard', temp)
+  socket.emit('getDeck', deck);
+})
 
-//giving action listeners for pieces
-function givePieceEventListeners() {
-  for (let i = 0; i < pieces.length; i++)
-    pieces[i].addEventListener("click", selectPiece(pieces[i]));
-}
 
-function selectPiece(piece) {
-  selectedPiece.pieceID = piece.pieceID;
-  selectedPiece.colour = piece.colour;
-  selectedPiece.x = piece.x;
-  makeMove();
-}
+//Hand setup
+socket.on('getHand', ()=>{
+  socket.emit('returnHand', hand)
+})
 
-//remove action listener for pieces
-function removePieceEventListeners() {
-  for (let i = 0; i < pieces.length; i++)
-    pieces[i].removeEventListener("click", selectPiece(pieces[i]));
-}
+socket.on("addCardToHand", (card) => {
+  hand.addCard(card);
+});
 
-function isPieceAtPosition(c, x) {}
-function validMove() {}
-function validRelease() {}
-function checkForWin() {}
-function isValidMove() {}
 
-function selectPiece() {}
+//displays the cards in the players hand
+socket.on("displayCards", () => {
+  
+  $("#card1").text(hand.cards[0].suite + hand.cards[0].value);
+  $("#card2").text(hand.cards[1].suite + hand.cards[1].value);
+  $("#card3").text(hand.cards[2].suite + hand.cards[2].value);
+  $("#card4").text(hand.cards[3].suite + hand.cards[3].value);
+  $("#card5").text(hand.cards[4].suite + hand.cards[4].value);
+});
 
-function StartTurn() {
-  turn = true;
-}
 
-//getting piece out
-function releasePiece(pieceID) {}
-
-//Highlight selected piece
-function highlightPiece(pieceID) {
-  document.getElementById(pieceID).style.border = "2px solid purple";
-}
-
-function makeMove() {
-  //if isValidMove
-
-  //depends on action
-
-  //regular move
-  if (selectedAction === "m") {
-    if (validMove(selectedPiece, selectedCard)) {
-    }
-  }
-
-  //swap
-  if (selectedAction === "s") {
-  }
-  //release a piece
-  if (selectedAction === "r") {
-  }
-
-  turn = false;
-}
