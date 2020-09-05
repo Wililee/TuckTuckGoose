@@ -1,4 +1,5 @@
 var express = require("express");
+const e = require("express");
 var app = express();
 const port = process.env.PORT || 3001;
 var server = app.listen(port, () => {
@@ -35,6 +36,8 @@ io.on("connect", (socket) => {
       },
     };
 
+    //default sets the room creater turn to true
+    socket.turn = true;
     //puts the room in the list of rooms :P
     rooms[room.id] = room;
     //makes them join the room they just created
@@ -59,6 +62,7 @@ io.on("connect", (socket) => {
     room.sockets.push(socket); //adds player to list of sockets
     socket.join(room, () => {
       socket.room = room;
+      socket.turn = false;
       socket.roomID = room.id;
       room.sockets.forEach((s) => {
         socket.emit("playerJoined", s.name);
@@ -147,9 +151,8 @@ io.on("connect", (socket) => {
     //change to the start screen
     io.in(room).emit("displayGame");
     socket.emit("getNewDeck");
-
-    dealOutCards(room, socket.deck, 5);
-
+    socket.turn = true;
+    dealOutCards(room, 5);
     io.in(room).emit("displayCards");
   });
 
@@ -161,27 +164,55 @@ io.on("connect", (socket) => {
 
   //get a deck from a socket and sets all other sockets deck to it
   socket.on("getDeck", (deck) => {
-    socket.deck = deck;
     //set everyones deck to the same one
     io.in(socket.room).emit("setDeck", deck);
   });
 
-  function dealOutCards(room, deck, numCards) {
-    for (var i = 0; i <= numCards; i++) {
-      //trigger the draw event for every socket
-      room.sockets.forEach((s) => {
-        io.in(room).emit("takeTopCard", s.name); //takes top card and updates everyones deck
-      });
+  function dealOutCards(room, numCards) {
+    for (var i = 0; i <= numCards*room.sockets.length; i++) {
+      //trigger the draw event for every socket one at a time
+        io.in(room).emit("yourTurnToTakeCard");
     }
   }
 
-  socket.on("takeTopCardOffDeckForAll", () => {
-    io.in(socket.room).emit("removeTopCard");
+  socket.on("drawCardAndPass", () => {
+    console.log(socket.turn, " is ", socket.name)
+    if (socket.turn) {
+      socket.emit("takeTopCard");
+      console.log(socket.name, "Drew");
+      moveTurnToNextSocket();
+    }
   });
+
+  function moveTurnToNextSocket() {
+    var i = 0;
+    socket.room.sockets.forEach((s) => {
+      if (s.turn === true) {
+        s.turn = false;
+        if (i === (socket.room.sockets.length - 1)) {
+          socket.room.sockets[0].turn = true;
+          return;
+        } else {
+          socket.room.sockets[i + 1].turn = true;
+          return;
+        }
+      }
+      i++;
+    });
+  }
 
   function findSocketWithCol(room, c) {
     for (s in room.sockets) if (s.colour === c) return s;
   }
 });
 
-///give players cards from just one sockets deeck then update everyones deck
+/*
+turn for each socket (need this anyways) socket.on'yourturnToTakeCard'
+take from top of deck
+update everyones deck
+
+pass to next turn --> get the list of sockets in the room and give to the one that is next
+if its the last one go to the first.
+
+the first person to be blocked would be their turn first. for the actual game
+*/

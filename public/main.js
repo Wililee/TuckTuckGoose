@@ -3,8 +3,8 @@ class Card {
     this.suite = suite;
     this.value = value;
   }
-  getString(){
-    return toString(this.suite) + toString(this.value)
+  getString() {
+    return toString(this.suite) + toString(this.value);
   }
 }
 
@@ -48,7 +48,6 @@ class Hand {
   addCard(c) {
     this.cards.push(c);
   }
-
 }
 
 /*---LOBBY SETUP---*/
@@ -66,7 +65,7 @@ $("#enterName").on("keyup", (key) => {
     socket.name = $("#enterName").val();
     socket.emit("setName", $("#enterName").val());
     $("#getName").hide();
-    $("#menu").show(); 
+    $("#menu").show();
   }
 });
 
@@ -158,13 +157,13 @@ $("#startGame").on("click", () => {
   socket.emit("startGame");
 });
 
-
 /* --- GAME SETUP ---*/
 //Initial player properties
 //let turn = false;
 deck = new Deck();
 hand = new Hand([]);
-let name;
+var name;
+var turn = false;
 // let pieces;
 // let partner;
 // let colour;
@@ -188,9 +187,8 @@ let name;
 socket.on("displayGame", () => {
   $("#lobby").hide();
   $("#inGame").show();
-  socket.emit('initHand', hand)
+  socket.emit("initHand", hand);
 });
-
 
 //deck setup
 socket.on("getNewDeck", () => {
@@ -201,36 +199,25 @@ socket.on("setDeck", (newDeck) => {
   deck = newDeck;
 });
 
-socket.on('takeTopCard',(n)=>{
-  if (n === name){
-  hand.addCard(deck.draw());
-  socket.emit('getDeck', deck);
-  }
-})
-
-socket.on('removeTopCard', ()=>{
-  deck.draw();
-})
-
-
-//Hand setup
-socket.on('getHand', ()=>{
-  socket.emit('returnHand', hand)
-})
-
-socket.on("addCardToHand", (card) => {
-  hand.addCard(card);
+socket.on("takeTopCard",() => {
+    hand.addCard(deck.draw);
+    socket.emit("getDeck", deck);
 });
 
+socket.on('yourTurnToTakeCard', () =>{
+  socket.emit('drawCardAndPass');
+})
+
+
+socket.on("removeTopCard", () => {
+  deck.draw();
+});
 
 //displays the cards in the players hand
 socket.on("displayCards", () => {
-  
   $("#card1").text(hand.cards[0].suite + hand.cards[0].value);
   $("#card2").text(hand.cards[1].suite + hand.cards[1].value);
   $("#card3").text(hand.cards[2].suite + hand.cards[2].value);
   $("#card4").text(hand.cards[3].suite + hand.cards[3].value);
   $("#card5").text(hand.cards[4].suite + hand.cards[4].value);
 });
-
-
