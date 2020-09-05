@@ -153,6 +153,7 @@ io.on("connect", (socket) => {
     socket.emit("getNewDeck");
     socket.turn = true;
     dealOutCards(room, 5);
+
     io.in(room).emit("displayCards");
   });
 
@@ -171,7 +172,7 @@ io.on("connect", (socket) => {
   function dealOutCards(room, numCards) {
     for (var i = 0; i <= numCards*room.sockets.length; i++) {
       //trigger the draw event for every socket one at a time
-        io.in(room).emit("yourTurnToTakeCard");
+        io.sockets.in(room).emit("yourTurnToTakeCard");
     }
   }
 

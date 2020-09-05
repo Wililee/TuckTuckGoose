@@ -209,10 +209,6 @@ socket.on('yourTurnToTakeCard', () =>{
 })
 
 
-socket.on("removeTopCard", () => {
-  deck.draw();
-});
-
 //displays the cards in the players hand
 socket.on("displayCards", () => {
   $("#card1").text(hand.cards[0].suite + hand.cards[0].value);
