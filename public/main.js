@@ -187,7 +187,7 @@ var turn = false;
 socket.on("displayGame", () => {
   $("#lobby").hide();
   $("#inGame").show();
-  socket.emit("initHand", hand);
+  socket.emit("initHand");
 });
 
 //deck setup
@@ -199,13 +199,26 @@ socket.on("setDeck", (newDeck) => {
   deck = newDeck;
 });
 
-socket.on("takeTopCard",() => {
-    hand.addCard(deck.draw);
-    socket.emit("getDeck", deck);
-});
 
-socket.on('yourTurnToTakeCard', () =>{
-  socket.emit('drawCardAndPass');
+socket.on('takeCards', (numCards, cardsPerHand) => {
+  let cards = [];
+  for (var i = 0; i < numCards; i ++)
+    cards.push(deck.draw());
+  
+  socket.emit('getDeck', deck)
+  socket.emit('giveOutCards', cards, cardsPerHand)
+  
+})
+
+socket.on('updateHand', () =>{
+  socket.emit('setHand');
+})
+
+socket.on('setMyHand', (newHand) => {
+  while(newHand.length){
+    hand.addCard(newHand.pop());
+  }
+  socket.emit('dispCards');
 })
 
 

@@ -154,12 +154,12 @@ io.on("connect", (socket) => {
     socket.turn = true;
     dealOutCards(room, 5);
 
-    io.in(room).emit("displayCards");
+    //io.in(room).emit("displayCards");
   });
 
   //initalize player hands
   socket.on("initHand", (hand) => {
-    socket.hand = hand;
+    socket.hand = [];
     socket.drawFlag = false;
   });
 
@@ -169,28 +169,34 @@ io.on("connect", (socket) => {
     io.in(socket.room).emit("setDeck", deck);
   });
 
-  function dealOutCards(room, numCards) {
-    for (var i = 0; i <= numCards*room.sockets.length; i++) {
-      //trigger the draw event for every socket one at a time
-        io.sockets.in(room).emit("yourTurnToTakeCard");
-    }
+  //deals out a number of cards to each player
+  function dealOutCards(room, cardsPerHand) {
+    socket.emit('takeCards', cardsPerHand*room.sockets.length, cardsPerHand)
   }
 
-  socket.on("drawCardAndPass", () => {
-    console.log(socket.turn, " is ", socket.name)
-    if (socket.turn) {
-      socket.emit("takeTopCard");
-      console.log(socket.name, "Drew");
-      moveTurnToNextSocket();
-    }
+  //gives out a set num of cards to each player
+  socket.on("giveOutCards", (cards, cardsPerHand) => {
+    socket.room.sockets.forEach((s) => {
+      for (var i = 0; i < cardsPerHand; i++) s.hand.push(cards.pop());
+    });
+    io.in(room).emit('updateHand') //just calls another emit to grab their hand
   });
 
+  socket.on('setHand',() => {
+    socket.emit('setMyHand', socket.hand);//this is just sending an array of cards
+  })
+
+  socket.on('dispCards',()=>{
+    socket.emit('displayCards')
+  })
+
   function moveTurnToNextSocket() {
+    console.log("changed to next turn");
     var i = 0;
     socket.room.sockets.forEach((s) => {
       if (s.turn === true) {
         s.turn = false;
-        if (i === (socket.room.sockets.length - 1)) {
+        if (i === socket.room.sockets.length - 1) {
           socket.room.sockets[0].turn = true;
           return;
         } else {
@@ -216,4 +222,53 @@ pass to next turn --> get the list of sockets in the room and give to the one th
 if its the last one go to the first.
 
 the first person to be blocked would be their turn first. for the actual game
+
+why not get each to just draw 6 then pass the turn on
+
+
+
+so async functions return a promise
+
+then if we use await to wait for that promis then we can do that action
+
+here it is applied 
+
+async function f() {
+
+  let promise = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("done!"), 1000)
+  });
+
+  let result = await promise; // wait until the promise resolves (*)
+
+  alert(result); // "done!"
+}
+
+ONLY WORKS IN ASYNC FUNCTIONS MAKE SURE TO USE INSIDE ASYNC
+
+so...
+
+async dealoutCards{
+
+  everyone takes cards
+  await the card take action
+  then do the next one !
+
+}
+
+set to promiss
+
+wait till promis gets thru till i do the change turn thing
+
+
+
+///////
+new idea
+draw a bunch of cards
+seperate into piles and assign then to the socket.hand
+then just emit to set hand 
+duh?
+
+
+
 */
