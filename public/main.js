@@ -7,7 +7,6 @@ class Card {
     return toString(this.suite) + toString(this.value);
   }
 }
-
 class Deck {
   constructor() {
     this.cards = [];
@@ -19,7 +18,16 @@ class Deck {
     }
     this.cards.push(new Card("joker", 20));
     this.cards.push(new Card("joker", 20));
-    //this.cards.sort(Math.random() - 0.5);
+    
+    //shuffles the cards
+    var curIndex = this.cards.length, tempVal, randIndex;
+    while(0 !== curIndex){
+      randIndex = Math.floor(Math.random() * curIndex);
+      curIndex -= 1;
+      tempVal = this.cards[curIndex];
+      this.cards[curIndex] = this.cards[randIndex];
+      this.cards[randIndex] = tempVal
+    }
   }
 
   draw() {
@@ -48,6 +56,20 @@ class Hand {
   addCard(c) {
     this.cards.push(c);
   }
+}
+
+class Piece {
+  constructor(colour, c, x){
+    this.colour = colour;
+    this.c = c;
+    this.x = x;
+  }
+}
+
+class Board {
+ constructor(){
+   //has piececs
+ }
 }
 
 /*---LOBBY SETUP---*/
@@ -164,24 +186,7 @@ deck = new Deck();
 hand = new Hand([]);
 var name;
 var turn = false;
-// let pieces;
-// let partner;
-// let colour;
-// let board;
-// let selectedPiece = {
-//   pieceID: 0,
-//   colour: null,
-//   x: -1,
-// };
-// let selectedCard = {
-//   cardID: 0,
-//   suite: null,
-//   value: null,
-//   actions: null,
-// };
-//the action is default set to just move after everytime
-//m - move  r - release s - swap
-//var selectedAction = "m";
+
 
 //going to game veiw
 socket.on("displayGame", () => {
@@ -220,7 +225,6 @@ socket.on('setMyHand', (newHand) => {
   }
   socket.emit('dispCards');
 })
-
 
 //displays the cards in the players hand
 socket.on("displayCards", () => {

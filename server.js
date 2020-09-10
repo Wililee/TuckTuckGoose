@@ -214,61 +214,9 @@ io.on("connect", (socket) => {
 });
 
 /*
-turn for each socket (need this anyways) socket.on'yourturnToTakeCard'
-take from top of deck
-update everyones deck
-
-pass to next turn --> get the list of sockets in the room and give to the one that is next
-if its the last one go to the first.
-
-the first person to be blocked would be their turn first. for the actual game
-
-why not get each to just draw 6 then pass the turn on
-
-
-
-so async functions return a promise
-
-then if we use await to wait for that promis then we can do that action
-
-here it is applied 
-
-async function f() {
-
-  let promise = new Promise((resolve, reject) => {
-    setTimeout(() => resolve("done!"), 1000)
-  });
-
-  let result = await promise; // wait until the promise resolves (*)
-
-  alert(result); // "done!"
-}
-
-ONLY WORKS IN ASYNC FUNCTIONS MAKE SURE TO USE INSIDE ASYNC
-
-so...
-
-async dealoutCards{
-
-  everyone takes cards
-  await the card take action
-  then do the next one !
-
-}
-
-set to promiss
-
-wait till promis gets thru till i do the change turn thing
-
-
-
-///////
-new idea
-draw a bunch of cards
-seperate into piles and assign then to the socket.hand
-then just emit to set hand 
-duh?
-
-
-
+display player pieces
+make the cards clickable on their turn
+allowa player to click a card to get their own piece  out
+allow player to move a piece
+incorperate turns
 */
